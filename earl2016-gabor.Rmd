@@ -4,7 +4,7 @@ author: "Gábor Csárdi"
 maketitle: true
 output:
   rmdshower::shower_presentation:
-    self_contained: false
+    self_contained: true
     theme: earl2016
     keep_md: true
     css: style.css
