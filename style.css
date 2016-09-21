@@ -1,0 +1,29 @@
+
+/* No underlines on title slide */
+
+#1 a:link {
+    text-decoration: none;
+}
+
+/* Outline page with bigger font */
+
+#outline ol {
+    font-size: 150%;
+}
+
+.slide:after {
+    content: 'Gábor Csárdi - Principal Consultant\A gcsardi@mango-solutions.com';
+    white-space: pre;
+    line-height: 1;
+    text-align: right;
+    color: #ddd;
+    font-size: 16px;
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    font-family: 'Arial';
+}
+
+h2.shout {
+    font-size: 36px;
+}
