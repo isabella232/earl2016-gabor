@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R Packages, Just as the Doctor Ordered</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="earl2016-gabor_files/rmdshower/node_modules/shower-earl2016/styles/screen-4x3.css">
+  <link rel="stylesheet" href="earl2016-gabor_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="earl2016-gabor_files/rmdshower/style-earl2016.css">
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+            <link rel="stylesheet" href="style.css"/>
+      
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>R Packages, Just as the Doctor Ordered</h1>
+    <p>Gábor Csárdi</p>
+  </header>
+
+    <section class="slide level1 titlepage">
+    <h1>R Packages, Just as the Doctor Ordered</h1>
+    <h2>Gábor Csárdi <br> </h2>
+  </section>
+    
+  
+<section id="outline" class="slide level2 nonum">
+<h2>Outline</h2>
+<style type="text/css">
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
+@import url("https://cdn.rawgit.com/gaborcsardi/r-font/master/rlogo.css");
+</style>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/mango.png" class="cover" style="width:40%;margin-left:30%;margin-top:-100px;"></p>
+<ol type="1">
+<li>Open source @ Mango</li>
+<li>Good practices for R packages</li>
+<li>Sneak peek 1: R docs in Markdown</li>
+<li>Sneak peek 2: surprise</li>
+</ol>
+</section>
+<section id="github.com-mangothecat" class="titleslide slide level1"><h2 class="shout">github.com/ MangoTheCat</h2></section><section id="why-r-packages" class="slide level2">
+<h2>Why R packages?</h2>
+<ul>
+<li>Reusable code? You want an R package!</li>
+<li>Easiest way to distribute and install
+<ul>
+<li>R code</li>
+<li>Documentation</li>
+<li>Manuals</li>
+<li>Data</li>
+<li>Tests</li>
+</ul></li>
+<li>Easiest way to specify and recreate environment: other R packages, system requirements, R version</li>
+</ul>
+</section><section id="what-could-should-be-an-r-package" class="slide level2">
+<h2>What could (should?) be an R package?</h2>
+<ul>
+<li>A statistical method</li>
+<li>A utility function (or a collection of them)</li>
+<li>A data analysis project</li>
+<li>An ETL project</li>
+<li>A shiny app</li>
+<li>Every piece of R code that you want to run again.</li>
+</ul>
+</section>
+<section id="we-need-to-improve-the-tools" class="titleslide slide level1"><h2 class="shout">We need to improve the tools</h2></section><section id="section" class="slide level2 fullpage">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/wtfm.jpg" class="cover" height="100%"></p>
+</section>
+<section id="existing-tools" class="titleslide slide level1"><h2 class="shout">Existing<br>Tools</h2></section></section>
+<section id="r-cmd-check" class="titleslide slide level1"><h2 class="shout"><code style="font-size: 70%">R CMD check</code></h2></section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/rcmdcheck.png" class="cover"></p>
+</section>
+<section id="jimhestercovr" class="titleslide slide level1"><h2 class="shout"><code style="font-size: 70%">jimhester/covr</code></h2></section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/covr.png" class="cover"></p>
+</section>
+<section id="jimhesterlintr" class="titleslide slide level1"><h2 class="shout"><code style="font-size: 70%">jimhester/lintr</code></h2></section><section id="section-3" class="slide level2 fullpage">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/PIKnpbn.png" class="cover"></p>
+</section>
+<section id="goodpractice" class="titleslide slide level1"><h2 class="shout"><code style="font-size: 70%">goodpractice</code></h2></section><section id="goodpractice-features" class="slide level2">
+<h2><code>goodpractice</code> features</h2>
+<div class="double">
+<p class="double-flow">
+<p><span class="icon-rlogo-alt" aria-hidden="true"></span>   Package building advice</p>
+<p><span class="fa fa-area-chart fa-fw" aria-hidden="true"></span>   Test coverage (<code>covr</code>)</p>
+<p><span class="fa fa-file-code-o fa-fw" aria-hidden="true"></span>   Code style linting (<code>lintr</code>)</p>
+<p><span class="fa fa-file-code-o fa-fw" aria-hidden="true"></span>   Code complexity</p>
+</p>
+<p class="double-flow">
+<p><span class="fa fa-check fa-fw" aria-hidden="true"></span>   Anti-patterns, anti-functions</p>
+<p><span class="fa fa-file-text-o fa-fw" aria-hidden="true"></span>   Documentation quality (soon)</p>
+<p><span class="fa fa-wrench fa-fw" aria-hidden="true"></span>   Custom rule sets</p>
+<p><span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>   Use on a CI</p>
+</p>
+</div>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/gp2.png" class="cover"></p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p><img src="/Users/gaborcsardi/works/mango/presentations/earl2016-gabor/gp3.png" class="cover"></p>
+</section>
+<section id="xmlparsedata" class="titleslide slide level1"><h2 class="shout"><code style="font-size: 70%">xmlparsedata</code></h2></section><section id="linting-labeled-subgraph-isomorphisms" class="slide level2">
+<h2>Linting: labeled subgraph isomorphisms</h2>
+<p>Example: search for <code>1:nrow(&lt;expression&gt;)</code></p>
+<pre><code>&lt;expr&gt;
+  +-- &lt;expr&gt;
+    +-- NUM_CONST: 1
+  +-- &#39;:&#39;
+  +-- &lt;expr&gt;
+    +-- &lt;expr&gt;
+      +-- SYMBOL_FUNCTION_CALL nrow
+    +-- &#39;(&#39;
+    +-- &lt;expr&gt;
+    +-- &#39;)&#39;</code></pre>
+</section><section id="easy-with-xpath" class="slide level2">
+<h2>Easy with <code>XPath</code></h2>
+<p>Example: search for <code>1:nrow(&lt;expr&gt;)</code></p>
+<pre><code>//expr
+  [expr[NUM_CONST[text()=&#39;1&#39;]]]
+  [OP-COLON]
+  [expr[expr[SYMBOL_FUNCTION_CALL[text()=&#39;nrow&#39;]]]]</code></pre>
+<p>Just convert the R parse tree to XML with <code>xmlparsedata</code>.</p>
+</section>
+<section id="r-docs-in-markdown" class="titleslide slide level1"><h2 class="shout">R docs in Markdown</h2></section><section id="wo-roxygen2" class="slide level2">
+<h2>w/o <code>roxygen2</code></h2>
+<pre><code>\name{make_style}
+\alias{make_style}
+\title{Create an ANSI color style}
+\usage{
+make_style(..., bg = FALSE, grey = FALSE, colors = num_colors())
+}
+\usage{
+\arguments{
+  \item{\dots}{\itemize{
+    \item An R color name, see \code{\link{colors}}.
+    \item A 6- or 8-digit hexa color string, e.g. \code{#ff0000} means
+      red. Transparency (alpha channel) values are ignored.
+    \item A one-column matrix with three rows for the red, green
+      and blue channels, as returned by
+      \code{\link[grDevices]{col2rgb}}.
+  }}
+  ...
+}</code></pre>
+</section><section id="w-roxygen2" class="slide level2">
+<h2>w/ <code>roxygen2</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&#39; Create an ANSI color style</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; @param ... Anything of the following:\itemize{</span>
+<span class="co">#&#39; \item An R color name, see \code{\link{colors}}.</span>
+<span class="co">#&#39; \item A 6- or 8-digit hexa color string, e.g. \code{#ff0000} means</span>
+<span class="co">#&#39;   red. Transparency (alpha channel) values are ignored.</span>
+<span class="co">#&#39; \item A one-column matrix with three rows for the red, green</span>
+<span class="co">#&#39;   and blue channels, as returned by \code{\link[grDevices]{col2rgb}}.</span>
+<span class="co">#&#39; }</span>
+
+make_style &lt;-<span class="st"> </span>function(..., <span class="dt">bg =</span> <span class="ot">FALSE</span>, <span class="dt">grey =</span> <span class="ot">FALSE</span>,
+  <span class="dt">colors =</span> <span class="kw">num_colors</span>()) {
+...</code></pre></div>
+</section><section id="w-roxygen2-6.0.0-soon" class="slide level2">
+<h2>w/ <code>roxygen2</code> 6.0.0 (soon)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&#39; Create an ANSI color style</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; @param Anything of the following:</span>
+<span class="co">#&#39;   * An R color name, see [colors].</span>
+<span class="co">#&#39;   * A 6- or 8-digit hexa color string, e.g. `#ff0000` means</span>
+<span class="co">#&#39;     red. Transparency (alpha channel) values are ignored.</span>
+<span class="co">#&#39;   * A one-column matrix with three rows for the red, green</span>
+<span class="co">#&#39;     and blue channels, as returned by [grDevices::col2rgb].</span>
+
+make_style &lt;-<span class="st"> </span>function(..., <span class="dt">bg =</span> <span class="ot">FALSE</span>, <span class="dt">grey =</span> <span class="ot">FALSE</span>,
+  <span class="dt">colors =</span> <span class="kw">num_colors</span>()) {
+...</code></pre></div>
+</section>
+<section id="like-shiny-apps" class="titleslide slide level1"><h2 class="shout">Like Shiny apps?</h2></section><section id="section-6" class="slide level2">
+<h2></h2>
+<div class="cover">
+<iframe src="http://localhost:8888" style="border: none; padding:5px; width: 1024px; height: 600px;">
+</iframe>
+</div>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<div class="cover">
+<iframe src="http://localhost:8889" style="border: none; padding:5px; width: 1024px; height: 600px;">
+</iframe>
+</div>
+</section>
+<section id="how-do-you-test-this-app" class="titleslide slide level1"><h2 class="shout">How do you test this app?</h2></section><section id="the-shinytest-package-wip" class="slide level2">
+<h2>The <code>shinytest</code> package (WIP)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinytest)
+
+<span class="kw">test_that</span>(<span class="st">&quot;the kmeans app updates the plot&quot;</span>, {
+  app &lt;-<span class="st"> </span>shinyapp$<span class="kw">new</span>(<span class="st">&quot;050-kmeans-example&quot;</span>)
+
+  <span class="kw">expect_equal</span>(app$<span class="kw">get_value</span>(<span class="st">&quot;xcol&quot;</span>), <span class="st">&quot;Sepal.Length&quot;</span>)
+  <span class="kw">expect_equal</span>(app$<span class="kw">get_value</span>(<span class="st">&quot;ycol&quot;</span>), <span class="st">&quot;Sepal.Width&quot;</span>)
+  <span class="kw">expect_equal</span>(app$<span class="kw">get_value</span>(<span class="st">&quot;clusters&quot;</span>), <span class="dv">3</span>)
+
+  <span class="kw">expect_update</span>(app, <span class="dt">xcol =</span> <span class="st">&quot;Sepal.Width&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;plot1&quot;</span>)
+  <span class="kw">expect_update</span>(app, <span class="dt">ycol =</span> <span class="st">&quot;Petal.Width&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;plot1&quot;</span>)
+  <span class="kw">expect_update</span>(app, <span class="dt">clusters =</span> <span class="dv">4</span>, <span class="dt">output =</span> <span class="st">&quot;plot1&quot;</span>)
+})</code></pre></div>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<div class="cover">
+<iframe src="http://localhost:8890" style="border: none; padding:5px; width: 1024px; height: 600px;">
+</iframe>
+</div>
+</section><section id="the-shinytest-package" class="slide level2">
+<h2>The <code>shinytest</code> package</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinytest)
+
+<span class="kw">test_that</span>(<span class="st">&quot;table is rendered and updated&quot;</span>, {
+  app &lt;-<span class="st"> </span>shinyapp$<span class="kw">new</span>(<span class="st">&quot;myapp&quot;</span>)
+  <span class="kw">expect_update</span>(app, <span class="dt">dataset =</span> <span class="st">&quot;iris&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;table&quot;</span>)
+  <span class="kw">expect_equal</span>(
+    <span class="kw">nrow</span>(app$<span class="kw">get_value</span>(<span class="st">&quot;table&quot;</span>)),
+    <span class="dv">5</span>
+  )
+})</code></pre></div>
+</section>
+<section id="github.com-mangothecat-1" class="titleslide slide level1"><h2 class="shout">github.com/ MangoTheCat</h2></section></section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="earl2016-gabor_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+  
+  
+</body>
+</html>
